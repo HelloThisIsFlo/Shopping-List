@@ -9,6 +9,7 @@ pytest = "*"
 pytest-watch = "*"
 pylint = "*"
 "autopep8" = "*"
+click = "*"
 
 [dev-packages]
 
