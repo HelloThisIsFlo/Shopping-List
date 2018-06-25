@@ -1,15 +1,15 @@
-AvailableItems:
-  - InWallSwitch
-  - InWallSwitchDouble
-  - PaddleSwitch
-  - PaddleSwitchDouble
-  - PaddleSwitchDouble
-  - BulbBasic
-  - BulbAmbiance
-  - BulbColor
-  - MotionSensor
-  - Sonoff
-  - GatewayXiaomi
+ItemPrices:
+  InWallSwitch: 3
+  InWallSwitchDouble: 0
+  PaddleSwitch: 1
+  PaddleSwitchDouble: 1
+  PaddleSwitchDouble: 1
+  BulbBasic: 1
+  BulbAmbiance: 1
+  BulbColor: 1
+  MotionSensor: 1
+  Sonoff: 1
+  GatewayXiaomi: 1
 
 
 Config:
