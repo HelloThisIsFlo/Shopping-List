@@ -1,0 +1,19 @@
+ItemPrices:
+  InWallSwitch: 10
+  PaddleSwitch: 25
+  MotionSensor: 5
+
+Config:
+  # Valid values: tradfri | hue
+  bulb-type: hue
+
+Rooms:
+  Kitchen:
+    - InWallSwitch
+    - InWallSwitch
+    - PaddleSwitch
+    - MotionSensor
+
+  Living-Room:
+    - MotionSensor
+

@@ -1,19 +1,16 @@
-import os
+import textwrap
 import yaml
-from pprint import pprint
+from shoppinglist.cost import CostCalculator, CostFormatter
 
+def _parse_file(filename):
+    with open(filename) as f:
+        parsed = yaml.load(f)
+        return (parsed['ItemPrices'], parsed['Rooms'])
 
-TEST_FILE='lists/basic_list.yaml'
+def process_file(filename):
+    prices, items_per_room = _parse_file(filename)
 
-def main():
-    print(os.getcwd())
-    dirs = os.listdir()
-    for d in dirs:
-        print(d)
-
-    with open(TEST_FILE) as f:
-        #  text = f.read()
-
-        y = yaml.load(f)
-        pprint(y)
-        #  print(text)
+    calculator = CostCalculator(prices)
+    formatter = CostFormatter()
+    cost_result = calculator.cost(items_per_room)
+    return formatter.format(cost_result)
