@@ -2,11 +2,13 @@
 import click
 from shoppinglist.main import Main
 
+DEFAULT_PRICES_FILE='./prices/hue.yaml'
 
 @click.command()
+@click.option('--prices', default=DEFAULT_PRICES_FILE, type=click.Path(exists=True), help="Path to a custom price file")
 @click.argument('shopping_list_file', type=click.Path(exists=True))
-def cli(shopping_list_file):
-    main = Main(shopping_list_file)
+def cli(prices, shopping_list_file):
+    main = Main(prices, shopping_list_file)
     click.echo(main.process_file())
 
 

@@ -1,26 +1,6 @@
-ItemPrices:
-  InWallSwitch: 3
-  InWallSwitchDouble: 0
-  PaddleSwitch: 1
-  PaddleSwitchDouble: 1
-  PaddleSwitchDouble: 1
-  BulbBasic: 1
-  BulbAmbiance: 1
-  BulbColor: 1
-  MotionSensor: 1
-  Sonoff: 1
-  GatewayXiaomi: 1
-
-
-Config:
-  # Valid values: tradfri | hue
-  bulb-type: hue
-
-
-Rooms:
-  Geo:
-    - InWallSwitch
-    - InWallSwitch
-    - PaddleSwitch
-    - MotionSensor
+Geo:
+  - InWallSwitch
+  - InWallSwitch
+  - PaddleSwitch
+  - MotionSensor
 

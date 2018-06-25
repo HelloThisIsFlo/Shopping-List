@@ -4,24 +4,16 @@ from shoppinglist.cost import CostCalculator, CostFormatter
 
 
 class Main:
-    def __init__(self, filename):
-        self.filename = filename
+    def __init__(self, prices_filename, items_per_room_filename):
         self.formatter = CostFormatter()
-        self.prices = {}
-        self.items_per_room = {}
+        self.prices = self._parse_file(prices_filename)
+        self.items_per_room = self._parse_file(items_per_room_filename)
 
-    def _setup_calculator_with_prices(self):
-        self.calculator = CostCalculator(self.prices)
-
-    def _parse_file(self):
-        with open(self.filename) as f:
-            parsed = yaml.load(f)
-            self.prices = parsed['ItemPrices']
-            self.items_per_room = parsed['Rooms']
+    def _parse_file(self, filename):
+        with open(filename) as f:
+            return yaml.load(f)
 
     def process_file(self):
-        self._parse_file()
-        self._setup_calculator_with_prices()
-
-        cost_result = self.calculator.cost(self.items_per_room)
+        calculator = CostCalculator(self.prices)
+        cost_result = calculator.cost(self.items_per_room)
         return self.formatter.format(cost_result)
