@@ -1,9 +1,8 @@
 import textwrap
-import shoppinglist.main
+from shoppinglist.main import Main
+
 
 def test_full_processing():
-    mock_file = './tests/complete_list_mock.yaml'
-
     # Kitchen:
     #   - InWallSwitch <- 10€
     #   - InWallSwitch <- 10€
@@ -14,9 +13,9 @@ def test_full_processing():
     #   - MotionSensor <-  5€
     #
     # ==> Total = 55 € | Kitchen = 50 € | Living Room = 5 €
-
-
-    assert shoppinglist.main.process_file(mock_file) == textwrap.dedent("""
+    mock_file = './tests/complete_list_mock.yaml'
+    main = Main(mock_file)
+    assert main.process_file() == textwrap.dedent("""
             Total cost breakdown
 
             ---
@@ -26,5 +25,3 @@ def test_full_processing():
 
             Total: 55 €
             """)
-
-
