@@ -1,4 +1,4 @@
-Available-Entities:
+AvailableItems:
   - InWallSwitch
   - InWallSwitchDouble
   - PaddleSwitch
@@ -13,6 +13,9 @@ Available-Entities:
 
 
 Config:
+  # Valid values: tradfri | hue
+  bulb-type: hue
+
 
 Rooms:
   Geo:
