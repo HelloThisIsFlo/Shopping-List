@@ -1,0 +1,23 @@
+Available-Entities:
+  - InWallSwitch
+  - InWallSwitchDouble
+  - PaddleSwitch
+  - PaddleSwitchDouble
+  - PaddleSwitchDouble
+  - BulbBasic
+  - BulbAmbiance
+  - BulbColor
+  - MotionSensor
+  - Sonoff
+  - GatewayXiaomi
+
+
+Config:
+
+Rooms:
+  Geo:
+    - InWallSwitch
+    - InWallSwitch
+    - PaddleSwitch
+    - MotionSensor
+
