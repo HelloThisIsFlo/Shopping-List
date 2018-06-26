@@ -69,6 +69,10 @@ Kudos to them :)
 
 More info on: [Pipenv: Python Development Workflow for Humans](https://github.com/pypa/pipenv)
 
+**Interested in having that setup automatically for you?**  
+Then check out my ansible role that does just that ;)  
+**==>** [FlorianKempenich.python-virtualenv](https://github.com/FlorianKempenich/ansible-role-python-virtualenv)
+
 ### Installation
 ```
 git clone git@github.com:FlorianKempenich/Shopping-List.git
