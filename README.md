@@ -59,6 +59,10 @@ Extra:
   - Shipping
 ```
 
+#### Demo versions of these files can be find under `demo/`  
+```shell
+./shopping_list demo/prices.yaml demo/shopping_list.yaml
+```
 
 ## Usage
 ### Prerequisites: Pipenv
@@ -78,6 +82,8 @@ Then check out my ansible role that does just that ;)
 git clone git@github.com:FlorianKempenich/Shopping-List.git
 cd Shopping-List
 pipenv install
+# Or, for development purposes
+pipenv install --dev && pipenv shell
 ```
 
 ### Usage

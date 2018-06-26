@@ -5,13 +5,13 @@ name = "pypi"
 
 [packages]
 pyyaml = "*"
-pytest = "*"
-pytest-watch = "*"
-pylint = "*"
-"autopep8" = "*"
 click = "*"
 
 [dev-packages]
+pytest = "*"
+pytest-watch = "*"
+pylint = "*"
+autopep8 = "*"
 
 [requires]
 python_version = "3.6"
