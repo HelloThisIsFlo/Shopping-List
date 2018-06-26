@@ -1,6 +1,9 @@
-Geo:
+Living-room:
   - InWallSwitch
   - InWallSwitch
   - PaddleSwitch
   - MotionSensor
 
+Kitchen:
+  - BulbBasic
+  - BulbAmbiance
