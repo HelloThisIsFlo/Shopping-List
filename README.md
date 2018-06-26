@@ -117,7 +117,7 @@ MotionSensor: 10.5
 
 BulbBasic: 30     <- Bump the price of 'basic' bulb to match
 BulbAmbiance: 30     the one of the 'ambiance' variation
-                     and see how that affects the Total!
+                     and see how it affects the Total!
 Shipping: 15
 ```
 
