@@ -85,6 +85,69 @@ class TestCostCalculator:
             ]
         }
 
+    class TestWithOverrides:
+        @pytest.fixture
+        def items(self):
+            # Without overrides that list should total 80 €
+            #
+            # - 1 x InWallSwitch =  5 €
+            # - 2 x BulbBasic    = 20 €
+            # - 1 x BulbColor    = 55 €
+            # --------------------------
+            #              Total = 80 €
+            return {
+                'kitchen': [
+                    'InWallSwitch',
+                    'BulbBasic'
+                ],
+                'living-room': [
+                    'BulbColor',
+                    'BulbBasic',
+                ]
+            }
+
+        def test_simple_override(self, items):  # TODO
+            # Given: Price 'InWallSwitch' increase 5 -> 10 €
+            with_increased_inwallswitch_price = {'InWallSwitch': 10}
+
+            # When: Calculating price
+            calculator = CostCalculator(
+                PRICES, (with_increased_inwallswitch_price,))
+            result = calculator.cost(items)
+
+            # Then: Total is increase of the corresponding ammount
+            assert result['total'] == 85  # 80 + 5 € increase
+
+        def test_override_inexisting(self, items):  # TODO
+            # Given: 'BulbColor' price absent from base price, but present in override
+            base_prices = PRICES.copy()
+            base_prices.pop('BulbColor')
+            assert 'BulbColor' not in base_prices
+            override_with_bulbcolor_price = {
+                'BulbColor': 155  # 100 € more than original pricehl
+            }
+
+            # When: Calculating price
+            calculator = CostCalculator(
+                base_prices, (override_with_bulbcolor_price,))
+            result = calculator.cost(items)
+
+            # Then: Total is based on the correct price
+            assert result['total'] == 180  # 80 + 100 € increase
+
+        def test_override_two_times(self, items):  # TODO
+            # Given: Price 'InWallSwitch' is overrided 2 times
+            first_override = {'InWallSwitch': 10}  # 5 € increase
+            second_override = {'InWallSwitch': 30}  # 25 € increase
+
+            # When: Calculating price
+            calculator = CostCalculator(
+                PRICES, (first_override, second_override))
+            result = calculator.cost(items)
+
+            # Then: Total is based on the last override
+            assert result['total'] == 105  # 80 + 25 € increase
+
 
 class TestCounter:
     @pytest.fixture

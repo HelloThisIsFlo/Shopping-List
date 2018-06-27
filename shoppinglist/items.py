@@ -14,8 +14,17 @@ class CostCalculator:
     Warning: NOT Thread Safe!
     """
 
-    def __init__(self, prices):
-        self.prices = prices
+    def __init__(self, prices, price_overrides=()):
+        self.prices = self._compute_final_price(prices, price_overrides)
+
+    @staticmethod
+    def _compute_final_price(base_prices, price_overrides):
+        final_prices = base_prices.copy()
+        for price_override in price_overrides:
+            for item in price_override:
+                final_prices[item] = price_override[item]
+
+        return final_prices
 
     def cost(self, items_per_category):
         self.items_per_category = items_per_category
