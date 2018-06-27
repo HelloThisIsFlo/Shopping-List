@@ -4,7 +4,7 @@ from .items import CostCalculator, Counter, Formatter
 
 
 class Main:
-    def __init__(self, prices_filename, items_per_category_filename):
+    def __init__(self, items_per_category_filename, prices_filename):
         self.formatter = Formatter()
         self.counter = Counter()
         self.prices = self._parse_file(prices_filename)
@@ -14,7 +14,7 @@ class Main:
         with open(filename) as f:
             return yaml.load(f)
 
-    def process_file(self, with_count=False):
+    def process_files(self, with_count=False):
         calculator = CostCalculator(self.prices)
         cost_result = calculator.cost(self.items_per_category)
 

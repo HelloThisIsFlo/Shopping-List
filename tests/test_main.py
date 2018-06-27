@@ -1,8 +1,14 @@
 import textwrap
 from shoppinglist.main import Main
 
+LIST_MOCK_FILE = './tests/mocks/shopping_list.yaml'
+LIST_WITH_EXTRA_ITEM_MOCK_FILE = './tests/mocks/shopping_list_with_extra_item.yaml'
+PRICES_MOCK_FILE = './tests/mocks/prices.yaml'
+PRICE_FIRST_OVERRIDE_MOCK_FILE = './tests/mocks/first_override.yaml'
+PRICE_SECOND_OVERRIDE_MOCK_FILE = './tests/mocks/second_override.yaml'
 
-def test_full_processing():
+
+def test_basic():
     # Kitchen:
     #   - InWallSwitch <- 10€
     #   - InWallSwitch <- 10€
@@ -14,12 +20,9 @@ def test_full_processing():
     #
     # ==> Total = 55 € | Kitchen = 50 € | Living Room = 5 €
 
-    list_mock_file = './tests/complete_list_mock.yaml'
-    prices_mock_file = './tests/prices_mock.yaml'
+    main = Main(LIST_MOCK_FILE, PRICES_MOCK_FILE)
 
-    main = Main(prices_mock_file, list_mock_file)
-
-    assert main.process_file() == textwrap.dedent("""
+    assert main.process_files() == textwrap.dedent("""
             Total cost breakdown
             --------------------
             Kitchen: 50 €
@@ -29,13 +32,11 @@ def test_full_processing():
             Total: 55 €
             """)
 
-def test_full_processing_with_count():
-    list_mock_file = './tests/complete_list_mock.yaml'
-    prices_mock_file = './tests/prices_mock.yaml'
 
-    main = Main(prices_mock_file, list_mock_file)
+def test_with_count():
+    main = Main(LIST_MOCK_FILE, PRICES_MOCK_FILE)
 
-    assert main.process_file(with_count=True) == textwrap.dedent("""
+    assert main.process_files(with_count=True) == textwrap.dedent("""
             Total cost breakdown
             --------------------
             Kitchen: 50 €
@@ -51,3 +52,7 @@ def test_full_processing_with_count():
 
             Total: 55 €
             """)
+
+
+def test_with_overrides():
+    pass

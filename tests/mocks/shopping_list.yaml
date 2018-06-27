@@ -1,0 +1,8 @@
+Kitchen:
+  - InWallSwitch
+  - InWallSwitch
+  - PaddleSwitch
+  - MotionSensor
+
+Living-Room:
+  - MotionSensor

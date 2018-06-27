@@ -6,4 +6,4 @@ Kitchen:
 
 Living-Room:
   - MotionSensor
-
+  - ExtraItemOnlyInSecondOverride
