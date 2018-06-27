@@ -9,7 +9,7 @@ def readme():
 
 setup(
     name='shoppinglist',
-    version='1.0.0',
+    version='1.0.1',
     description='Quickly different combinations of prices and spare money',
     long_description=readme(),
     keywords='shopping calculator cost saving money shopping_list cli awesome',
@@ -19,7 +19,7 @@ setup(
         'Intended Audience :: End Users/Desktop',
         'License :: OSI Approved :: MIT License',
         'Topic :: Utilities',
-        'Topic :: Office/Business :: Financial'
+        'Topic :: Office/Business :: Financial',
         'Topic :: Home Automation'
     ],
     url='https://floriankempenich.github.io/Shopping-List',
