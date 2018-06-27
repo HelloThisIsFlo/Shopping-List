@@ -9,7 +9,7 @@ def readme():
 
 setup(
     name='shoppinglist',
-    version='1.0.1',
+    version='1.0.2',
     description='Quickly different combinations of prices and spare money',
     long_description=readme(),
     keywords='shopping calculator cost saving money shopping_list cli awesome',

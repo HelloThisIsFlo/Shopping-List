@@ -1,4 +1,5 @@
 # Shopping List - Do More, Pay Less
+[![Travis](https://img.shields.io/travis/FlorianKempenich/Shopping-List.svg)](https://travis-ci.org/FlorianKempenich/Shopping-List) [![PyPI](https://img.shields.io/pypi/v/shoppinglist.svg)](https://pypi.org/project/shoppinglist/)
 
 `shopping_list` is a simple tool to calculate the cost breakdown and total of a shopping list containing items in multiple categories.
 
