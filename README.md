@@ -69,7 +69,7 @@ shoppinglist demo/shopping_list.yaml demo/prices.yaml
 ## Usage
 ### Installation
 ```bash
-pip install shoppinglist
+pip3 install shoppinglist
 ```
 
 ### Usage
