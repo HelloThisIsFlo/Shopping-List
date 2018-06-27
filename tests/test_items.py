@@ -1,6 +1,6 @@
 import textwrap
 import pytest
-from shoppinglist.cost import CostCalculator, InvalidItem, CostFormatter
+from shoppinglist.items import CostCalculator, InvalidItem, Formatter
 
 PRICES = {
     'InWallSwitch': 5,
@@ -9,7 +9,7 @@ PRICES = {
 }
 
 
-class TestCalculator:
+class TestCostCalculator:
     @pytest.fixture
     def calculator(self):
         calculator = CostCalculator(PRICES)
@@ -89,7 +89,7 @@ class TestCalculator:
 class TestFormatter:
     @pytest.fixture
     def formatter(self):
-        return CostFormatter()
+        return Formatter()
 
     def test_single_room(self, formatter):
         assert formatter.format({

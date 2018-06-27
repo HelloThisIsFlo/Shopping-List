@@ -9,7 +9,7 @@ class InvalidItem(Exception):
 class CostCalculator:
     """
 
-    Calculates the cost of times
+    Calculates the cost of items
 
     Warning: NOT Thread Safe!
     """
@@ -48,7 +48,7 @@ class CostCalculator:
                         "No price found for this item: '" + item + "'")
 
 
-class CostFormatter:
+class Formatter:
     def format(self, cost_result):
         self.cost_result = cost_result
 

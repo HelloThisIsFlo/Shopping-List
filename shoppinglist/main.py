@@ -1,11 +1,11 @@
 import textwrap
 import yaml
-from .cost import CostCalculator, CostFormatter
+from .items import CostCalculator, Formatter
 
 
 class Main:
     def __init__(self, prices_filename, items_per_room_filename):
-        self.formatter = CostFormatter()
+        self.formatter = Formatter()
         self.prices = self._parse_file(prices_filename)
         self.items_per_room = self._parse_file(items_per_room_filename)
 
