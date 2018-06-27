@@ -89,6 +89,10 @@ pipenv install --dev && pipenv shell
 ### Usage
 ```
 ./shopping_list PRICES_FILE SHOPPING_LIST_FILE
+
+# Or
+
+./shopping_list --with-count PRICES_FILE SHOPPING_LIST_FILE
 ```
 
 #### Format for the files
