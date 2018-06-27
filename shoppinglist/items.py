@@ -68,19 +68,21 @@ class Formatter:
     def format(self, cost_result, count_result={}):
         self.cost_result = cost_result
 
-        breakdown_header= self._format_header_title()
-        breakdown_content = self._format_breakdown_content()
-        breakdown_footer = "\n--------------------\n"
-
-        breakdown = breakdown_header + breakdown_content + breakdown_footer
+        breakdown = self._format_breakdown()
         footer_total = self._format_footer_total()
 
         return breakdown + footer_total
 
-    def _format_header_title(self):
-        return textwrap.dedent("""
+    def _format_breakdown(self):
+        header = textwrap.dedent("""
             Total cost breakdown
             --------------------""")
+        content = self._format_breakdown_content()
+        footer = textwrap.dedent("""
+            --------------------
+            """)
+
+        return header + content + footer
 
     def _format_breakdown_content(self):
         formatted_categories = ['']
