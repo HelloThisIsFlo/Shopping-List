@@ -67,11 +67,13 @@ class Counter:
 class Formatter:
     def format(self, cost_result, count_result={}):
         self.cost_result = cost_result
+        self.count_result = count_result
 
         breakdown = self._format_breakdown()
-        footer_total = self._format_footer_total()
+        count = self._format_count()
+        total = self._format_total()
 
-        return breakdown + footer_total
+        return breakdown + count + total
 
     def _format_breakdown(self):
         header = textwrap.dedent("""
@@ -92,13 +94,35 @@ class Formatter:
 
         return '\n'.join(formatted_categories)
 
+    def _format_count(self):
+        if self.count_result == {}:
+            return ""
+
+        header = textwrap.dedent("""
+            Item Count
+            --------------------""")
+        content = self._format_count_content()
+        footer = textwrap.dedent("""
+            --------------------
+            """)
+
+        return header + content + footer
+
+    def _format_count_content(self):
+        formatted_count = ['']
+        for item in self.count_result:
+            count = self.count_result[item]
+            formatted_count.append(f"{item}: {count}")
+
+        return '\n'.join(formatted_count)
+
     @staticmethod
     def _format_category_name(category_name):
         return ' '.join(list(map(
             lambda n: n.capitalize(),
             category_name.split('-'))))
 
-    def _format_footer_total(self):
+    def _format_total(self):
         return textwrap.dedent(f"""
             Total: {self.cost_result['total']} €
             """)

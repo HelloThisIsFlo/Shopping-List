@@ -164,7 +164,6 @@ class TestFormatter:
                 Total: 80 €
                 """)
 
-    @pytest.mark.skip   
     class TestWithCount:
         def test_multiple_categories(self, formatter):
             formatted = formatter.format(
@@ -187,7 +186,7 @@ class TestFormatter:
                 Living Room: 65 €
                 --------------------
 
-                Item Count 
+                Item Count
                 --------------------
                 InWallSwitch: 1
                 BulbBasic: 2
