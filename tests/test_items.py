@@ -116,52 +116,83 @@ class TestFormatter:
     def formatter(self):
         return Formatter()
 
-    def test_single_room(self, formatter):
-        assert formatter.format({
-            'total': 15,
-            'rooms': [
-                ('kitchen', 15),
-            ]
-        }) == textwrap.dedent("""
-            Total cost breakdown
+    class TestWithoutCount:
+        def test_single_room(self, formatter):
+            assert formatter.format({
+                'total': 15,
+                'rooms': [
+                    ('kitchen', 15),
+                ]
+            }) == textwrap.dedent("""
+                Total cost breakdown
+                --------------------
+                Kitchen: 15 €
+                --------------------
 
-            ---
-            Kitchen: 15 €
-            ---
+                Total: 15 €
+                """)
 
-            Total: 15 €
-            """)
+        def test_single_room_multiple_words(self, formatter):
+            assert formatter.format({
+                'total': 80,
+                'rooms': [
+                    ('living-room', 80)
+                ]
+            }) == textwrap.dedent("""
+                Total cost breakdown
+                --------------------
+                Living Room: 80 €
+                --------------------
 
-    def test_single_room_multiple_words(self, formatter):
-        assert formatter.format({
-            'total': 80,
-            'rooms': [
-                ('living-room', 80)
-            ]
-        }) == textwrap.dedent("""
-            Total cost breakdown
+                Total: 80 €
+                """)
 
-            ---
-            Living Room: 80 €
-            ---
+        def test_multiple_rooms(self, formatter):
+            assert formatter.format({
+                'total': 80,
+                'rooms': [
+                    ('kitchen', 15),
+                    ('living-room', 65)
+                ]
+            }) == textwrap.dedent("""
+                Total cost breakdown
+                --------------------
+                Kitchen: 15 €
+                Living Room: 65 €
+                --------------------
 
-            Total: 80 €
-            """)
+                Total: 80 €
+                """)
 
-    def test_multiple_rooms(self, formatter):
-        assert formatter.format({
-            'total': 80,
-            'rooms': [
-                ('kitchen', 15),
-                ('living-room', 65)
-            ]
-        }) == textwrap.dedent("""
-            Total cost breakdown
+    class TestWithCount:
+        @pytest.mark.skip
+        def test_multiple_rooms(self, formatter):
+            formatted = formatter.format(
+                {
+                    'total': 80,
+                    'rooms': [
+                        ('kitchen', 15),
+                        ('living-room', 65)
+                    ]
+                }, {
+                    'InWallSwitch': 1,
+                    'BulbBasic': 2,
+                    'BulbColor': 1
+                })
 
-            ---
-            Kitchen: 15 €
-            Living Room: 65 €
-            ---
+            assert formatted == textwrap.dedent("""
+                Total cost breakdown
+                --------------------
+                Kitchen: 15 €
+                Living Room: 65 €
+                --------------------
 
-            Total: 80 €
-            """)
+                Item Count 
+                --------------------
+                InWallSwitch: 1
+                BulbBasic: 2
+                BulbColor: 1
+                --------------------
+
+                Total: 80 €
+                """)

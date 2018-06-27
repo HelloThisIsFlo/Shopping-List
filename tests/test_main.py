@@ -21,11 +21,10 @@ def test_full_processing():
 
     assert main.process_file() == textwrap.dedent("""
             Total cost breakdown
-
-            ---
+            --------------------
             Kitchen: 50 €
             Living Room: 5 €
-            ---
+            --------------------
 
             Total: 55 €
             """)

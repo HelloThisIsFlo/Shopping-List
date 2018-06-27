@@ -65,7 +65,7 @@ class Counter:
 
 
 class Formatter:
-    def format(self, cost_result):
+    def format(self, cost_result, count_result={}):
         self.cost_result = cost_result
 
         header_title = self._format_header_title()
@@ -77,8 +77,7 @@ class Formatter:
     def _format_header_title(self):
         return textwrap.dedent("""
             Total cost breakdown
-
-            ---""")
+            --------------------""")
 
     def _format_rooms(self):
         formatted_rooms = ['']
@@ -96,7 +95,7 @@ class Formatter:
 
     def _format_footer_total(self):
         return textwrap.dedent(f"""
-            ---
+            --------------------
 
             Total: {self.cost_result['total']} €
             """)
