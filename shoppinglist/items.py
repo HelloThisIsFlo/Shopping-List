@@ -48,6 +48,22 @@ class CostCalculator:
                         "No price found for this item: '" + item + "'")
 
 
+class Counter:
+    def __init__(self):
+        pass
+
+    def count_items(self, items_per_room):
+        count_result = {}
+        for room in items_per_room:
+            for item in items_per_room[room]:
+                if item in count_result:
+                    count_result[item] += 1
+                else:
+                    count_result[item] = 1
+
+        return count_result
+
+
 class Formatter:
     def format(self, cost_result):
         self.cost_result = cost_result

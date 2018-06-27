@@ -1,6 +1,6 @@
 import textwrap
 import pytest
-from shoppinglist.items import CostCalculator, InvalidItem, Formatter
+from shoppinglist.items import CostCalculator, InvalidItem, Counter, Formatter
 
 PRICES = {
     'InWallSwitch': 5,
@@ -83,6 +83,31 @@ class TestCostCalculator:
                 ('kitchen', 15),
                 ('living-room', 65)
             ]
+        }
+
+
+class TestCounter:
+    @pytest.fixture
+    def counter(self):
+        return Counter()
+
+    def test_multiple_rooms(self, counter):
+        items_per_room = {
+            'kitchen': [
+                'InWallSwitch',
+                'BulbBasic'
+            ],
+            'living-room': [
+                'BulbColor',
+                'BulbBasic',
+            ]
+        }
+        res = counter.count_items(items_per_room)
+
+        assert res == {
+            'InWallSwitch': 1,
+            'BulbBasic': 2,
+            'BulbColor': 1
         }
 
 
