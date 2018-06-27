@@ -63,14 +63,18 @@ Shipping: 15
 
 #### Demo versions of these files can be find under `demo/`  
 ```shell
-shoppinglist demo/shopping_list.yaml demo/prices.yaml
+cd demo
+shoppinglist shopping_list.yaml prices.yaml
 ```
 
 ## Usage
 ### Installation
 ```bash
 pip3 install shoppinglist
+# Or
+pip3 install --user shoppinglist
 ```
+**Warning:** Use python 3!
 
 ### Usage
 ```
@@ -145,15 +149,17 @@ Shipping: 15
 
 ##### Results
 ```shell
-> shoppinglist demo/shopping_list.yaml demo/prices.yaml
+# In 'demo/' folder
+
+> shoppinglist shopping_list.yaml prices.yaml
 ...
 Total: 137.5 €
 
-> shoppinglist demo/shopping_list.yaml demo/amazon.yaml 
+> shoppinglist shopping_list.yaml amazon.yaml 
 ...
 Total: 174.5 €
 
-> shoppinglist demo/shopping_list.yaml demo/upgrade_basic_to_ambiance.yaml
+> shoppinglist shopping_list.yaml upgrade_basic_to_ambiance.yaml
 ...
 Total: 152.5 €
 ```
@@ -186,15 +192,17 @@ BulbAmbiance: 20 <- Cheaper Bulbs
 
 ##### Results
 ```shell
-> shoppinglist demo/shopping_list.yaml demo/prices.yaml
+# In 'demo/' folder
+
+> shoppinglist shopping_list.yaml prices.yaml
 ...
 Total: 137.5 €
 
-> shoppinglist demo/shopping_list.yaml demo/prices.yaml demo/free_shipping.yaml
+> shoppinglist shopping_list.yaml prices.yaml free_shipping.yaml
 ...
 Total: 122.5 €
 
-> shoppinglist demo/shopping_list.yaml demo/prices.yaml demo/free_shipping.yaml demo/tradfri_bulb_instead_of_hue.yaml
+> shoppinglist shopping_list.yaml prices.yaml free_shipping.yaml tradfri_bulb_instead_of_hue.yaml
 ...
 Total: 107.5 €
 ```

@@ -1,15 +1,13 @@
 from setuptools import setup
 from os.path import expanduser
 
-HOME = expanduser("~")
-
 def readme():
     with open('README.md') as f:
         return f.read()
 
 setup(
     name='shoppinglist',
-    version='1.0.3',
+    version='1.0.4',
     description='Quickly different combinations of prices and spare money',
     long_description=readme(),
     keywords='shopping calculator cost saving money shopping_list cli awesome',
