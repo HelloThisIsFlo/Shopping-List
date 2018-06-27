@@ -55,4 +55,29 @@ def test_with_count():
 
 
 def test_with_overrides():
-    pass
+    main = Main(
+        LIST_WITH_EXTRA_ITEM_MOCK_FILE,
+        PRICES_MOCK_FILE,
+        (PRICE_FIRST_OVERRIDE_MOCK_FILE, PRICE_SECOND_OVERRIDE_MOCK_FILE))
+
+    # Expected result:
+    # Kitchen:
+    #   - InWallSwitch <- 10€
+    #   - InWallSwitch <- 10€
+    #   - PaddleSwitch <- 20€ (overriden from base 25€)
+    #   - MotionSensor <- 15€ (overriden from base  5€)
+    #
+    # Living-Room:
+    #   - MotionSensor <- 15€ (overriden from base  5€)
+    #   - ExtraItemOnlyInSecondOverride <- 10€ (from second override)
+    #
+    # ==> Total = 80 € | Kitchen = 55 € | Living Room = 25 €
+    assert main.process_files() == textwrap.dedent("""
+            Total cost breakdown
+            --------------------
+            Kitchen: 55 €
+            Living Room: 25 €
+            --------------------
+
+            Total: 80 €
+            """)
