@@ -1,6 +1,6 @@
 import textwrap
 import yaml
-from shoppinglist.cost import CostCalculator, CostFormatter
+from .cost import CostCalculator, CostFormatter
 
 
 class Main:
