@@ -17,32 +17,32 @@ class CostCalculator:
     def __init__(self, prices):
         self.prices = prices
 
-    def cost(self, items_per_room):
-        self.items_per_room = items_per_room
+    def cost(self, items_per_category):
+        self.items_per_category = items_per_category
         self._ensure_valid_items()
 
         total = 0
-        rooms = []
-        for room in items_per_room:
-            room_total = self._calculate_room_total(room)
-            rooms.append((room, room_total))
-            total += room_total
+        categories = []
+        for category in items_per_category:
+            category_total = self._calculate_category_total(category)
+            categories.append((category, category_total))
+            total += category_total
 
         return {
             'total': total,
-            'rooms': rooms
+            'categories': categories
         }
 
-    def _calculate_room_total(self, room):
+    def _calculate_category_total(self, category):
         total = 0
-        for item in self.items_per_room[room]:
+        for item in self.items_per_category[category]:
             price = self.prices[item]
             total += price
         return total
 
     def _ensure_valid_items(self):
-        for room in self.items_per_room:
-            for item in self.items_per_room[room]:
+        for category in self.items_per_category:
+            for item in self.items_per_category[category]:
                 if item not in self.prices:
                     raise InvalidItem(
                         "No price found for this item: '" + item + "'")
@@ -52,10 +52,10 @@ class Counter:
     def __init__(self):
         pass
 
-    def count_items(self, items_per_room):
+    def count_items(self, items_per_category):
         count_result = {}
-        for room in items_per_room:
-            for item in items_per_room[room]:
+        for category in items_per_category:
+            for item in items_per_category[category]:
                 if item in count_result:
                     count_result[item] += 1
                 else:
@@ -68,34 +68,35 @@ class Formatter:
     def format(self, cost_result, count_result={}):
         self.cost_result = cost_result
 
-        header_title = self._format_header_title()
-        rooms = self._format_rooms()
+        breakdown_header= self._format_header_title()
+        breakdown_content = self._format_breakdown_content()
+        breakdown_footer = "\n--------------------\n"
+
+        breakdown = breakdown_header + breakdown_content + breakdown_footer
         footer_total = self._format_footer_total()
 
-        return header_title + rooms + footer_total
+        return breakdown + footer_total
 
     def _format_header_title(self):
         return textwrap.dedent("""
             Total cost breakdown
             --------------------""")
 
-    def _format_rooms(self):
-        formatted_rooms = ['']
-        for (room, cost) in self.cost_result['rooms']:
-            formatted_room_name = self._format_room_name(room)
-            formatted_rooms.append(f"{formatted_room_name}: {cost} €")
+    def _format_breakdown_content(self):
+        formatted_categories = ['']
+        for (category, cost) in self.cost_result['categories']:
+            formatted_category_name = self._format_category_name(category)
+            formatted_categories.append(f"{formatted_category_name}: {cost} €")
 
-        return '\n'.join(formatted_rooms)
+        return '\n'.join(formatted_categories)
 
     @staticmethod
-    def _format_room_name(room_name):
+    def _format_category_name(category_name):
         return ' '.join(list(map(
             lambda n: n.capitalize(),
-            room_name.split('-'))))
+            category_name.split('-'))))
 
     def _format_footer_total(self):
         return textwrap.dedent(f"""
-            --------------------
-
             Total: {self.cost_result['total']} €
             """)

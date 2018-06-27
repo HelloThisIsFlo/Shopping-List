@@ -26,25 +26,25 @@ class TestCostCalculator:
         assert str(
             e.value) == "No price found for this item: 'ThisItemHasNoPrice'"
 
-    def test_single_room(self, calculator):
-        items_per_room = {
+    def test_single_category(self, calculator):
+        items_per_category = {
             'kitchen': [
                 'InWallSwitch',
                 'BulbBasic'
             ]
         }
 
-        res = calculator.cost(items_per_room)
+        res = calculator.cost(items_per_category)
 
         assert res == {
             'total': 15,
-            'rooms': [
+            'categories': [
                 ('kitchen', 15)
             ]
         }
 
-    def test_single_room_with_duplicates(self, calculator):
-        items_per_room = {
+    def test_single_category_with_duplicates(self, calculator):
+        items_per_category = {
             'kitchen': [
                 'InWallSwitch',
                 'InWallSwitch',
@@ -54,17 +54,17 @@ class TestCostCalculator:
             ]
         }
 
-        res = calculator.cost(items_per_room)
+        res = calculator.cost(items_per_category)
 
         assert res == {
             'total': 30,
-            'rooms': [
+            'categories': [
                 ('kitchen', 30)
             ]
         }
 
-    def test_multiple_rooms(self, calculator):
-        items_per_room = {
+    def test_multiple_categories(self, calculator):
+        items_per_category = {
             'kitchen': [
                 'InWallSwitch',
                 'BulbBasic'
@@ -75,11 +75,11 @@ class TestCostCalculator:
             ]
         }
 
-        res = calculator.cost(items_per_room)
+        res = calculator.cost(items_per_category)
 
         assert res == {
             'total': 80,
-            'rooms': [
+            'categories': [
                 ('kitchen', 15),
                 ('living-room', 65)
             ]
@@ -91,8 +91,8 @@ class TestCounter:
     def counter(self):
         return Counter()
 
-    def test_multiple_rooms(self, counter):
-        items_per_room = {
+    def test_multiple_categories(self, counter):
+        items_per_category = {
             'kitchen': [
                 'InWallSwitch',
                 'BulbBasic'
@@ -102,7 +102,7 @@ class TestCounter:
                 'BulbBasic',
             ]
         }
-        res = counter.count_items(items_per_room)
+        res = counter.count_items(items_per_category)
 
         assert res == {
             'InWallSwitch': 1,
@@ -117,10 +117,10 @@ class TestFormatter:
         return Formatter()
 
     class TestWithoutCount:
-        def test_single_room(self, formatter):
+        def test_single_category(self, formatter):
             assert formatter.format({
                 'total': 15,
-                'rooms': [
+                'categories': [
                     ('kitchen', 15),
                 ]
             }) == textwrap.dedent("""
@@ -132,10 +132,10 @@ class TestFormatter:
                 Total: 15 €
                 """)
 
-        def test_single_room_multiple_words(self, formatter):
+        def test_single_category_multiple_words(self, formatter):
             assert formatter.format({
                 'total': 80,
-                'rooms': [
+                'categories': [
                     ('living-room', 80)
                 ]
             }) == textwrap.dedent("""
@@ -147,10 +147,10 @@ class TestFormatter:
                 Total: 80 €
                 """)
 
-        def test_multiple_rooms(self, formatter):
+        def test_multiple_categories(self, formatter):
             assert formatter.format({
                 'total': 80,
-                'rooms': [
+                'categories': [
                     ('kitchen', 15),
                     ('living-room', 65)
                 ]
@@ -164,13 +164,13 @@ class TestFormatter:
                 Total: 80 €
                 """)
 
+    @pytest.mark.skip   
     class TestWithCount:
-        @pytest.mark.skip
-        def test_multiple_rooms(self, formatter):
+        def test_multiple_categories(self, formatter):
             formatted = formatter.format(
                 {
                     'total': 80,
-                    'rooms': [
+                    'categories': [
                         ('kitchen', 15),
                         ('living-room', 65)
                     ]
