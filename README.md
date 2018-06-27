@@ -16,7 +16,7 @@ The project was originally created to estimate the total cost of devices in a Ho
 
 
 ```shell
-> ./shopping_list prices.yaml shopping_list.yaml
+> ./shopping_list shopping_list.yaml prices.yaml 
 
 Total cost breakdown
 
@@ -30,20 +30,7 @@ Total: 137.5 €
 
 ```
 
-#### With `prices.yaml`
-```yaml
-InWallSwitch: 26
-PaddleSwitch: 15
-
-MotionSensor: 10.5
-
-BulbBasic: 15
-BulbAmbiance: 30
-
-Shipping: 15
-```
-
-#### And `shopping_list.yaml`
+#### With `shopping_list.yaml`
 ```yaml
 Living-room:
   - InWallSwitch
@@ -59,9 +46,23 @@ Extra:
   - Shipping
 ```
 
+#### And `prices.yaml`
+```yaml
+InWallSwitch: 26
+PaddleSwitch: 15
+
+MotionSensor: 10.5
+
+BulbBasic: 15
+BulbAmbiance: 30
+
+Shipping: 15
+```
+
+
 #### Demo versions of these files can be find under `demo/`  
 ```shell
-./shopping_list demo/prices.yaml demo/shopping_list.yaml
+./shopping_list demo/shopping_list.yaml demo/prices.yaml
 ```
 
 ## Usage
@@ -88,15 +89,31 @@ pipenv install --dev && pipenv shell
 
 ### Usage
 ```
-./shopping_list PRICES_FILE SHOPPING_LIST_FILE
+Usage: ./shopping_list [OPTIONS] SHOPPING_LIST_FILE PRICES_FILE
+                       [PRICE_OVERRIDES_FILES]...
 
-# Or
-
-./shopping_list --with-count PRICES_FILE SHOPPING_LIST_FILE
+Options:
+  --with-count  Display the count for each item
+  --help        Show this message and exit.
 ```
+#### Arguments
+##### `SHOPPING_LIST_FILE`
+* The shopping list
+* `shopping_list.yaml` in the previous examples
+
+##### `PRICES_FILE`
+* The base prices
+* `prices.yaml` in the previous examples
+
+##### `[PRICE_OVERRIDES_FILES]`
+* Zero or multiple _price overrides files_
+* A _price override_ has the same format as the `PRICES_FILE` file
+* `PRICE_OVERRIDES_FILES` define prices overridings the base prices present in `PRICES_FILE`
+* Kinda like _mixins_ for the price list
+* In case of _multiple overrides_, only the _last one_ is taken into account
 
 #### Format for the files
-##### `prices.yaml`
+##### `prices.yaml` and `price_overrides_*.yaml`
 * 1 item per line, with its price
 * See example
 
@@ -107,8 +124,14 @@ pipenv install --dev && pipenv shell
 * Duplicates allowed, they will be counted twice
 * See example
 
-## Pro Tip
+## Pro Tip - Price combinations
 Create different combination of **prices** to see quickly see the influence of your purchase decisions.
+
+#### To do so, you have 2 options:
+* Define **multiple base prices**
+* Define **a base price** and **override individual items**
+
+### Using multiple base prices
 ##### For instance `amazon.yaml`
 ```yaml
 InWallSwitch: 56 <- More expensive InWallSwitch
@@ -122,7 +145,7 @@ BulbAmbiance: 30
 Shipping: 0      <- Free shipping
 ```
 
-#### Or: `upgrade_basic_to_ambiance.yaml`
+##### Or `upgrade_basic_to_ambiance.yaml`
 ```yaml
 InWallSwitch: 26
 PaddleSwitch: 15
@@ -133,6 +156,62 @@ BulbBasic: 30     <- Bump the price of 'basic' bulb to match
 BulbAmbiance: 30     the one of the 'ambiance' variation
                      and see how it affects the Total!
 Shipping: 15
+```
+
+##### Results
+```shell
+> ./shopping_list demo/shopping_list.yaml demo/prices.yaml
+...
+Total: 137.5 €
+
+> ./shopping_list demo/shopping_list.yaml demo/amazon.yaml 
+...
+Total: 174.5 €
+
+> ./shopping_list demo/shopping_list.yaml demo/upgrade_basic_to_ambiance.yaml
+...
+Total: 152.5 €
+```
+
+
+### Using prices overrides
+##### With base `prices.yaml`
+```yaml
+InWallSwitch: 26
+PaddleSwitch: 15
+
+MotionSensor: 10.5
+
+BulbBasic: 15
+BulbAmbiance: 30
+
+Shipping: 15
+```
+
+##### First override `free_shipping.yaml`
+```yaml
+Shipping: 0 <- Free shipping
+```
+
+##### Second override `tradfri_bulb_instead_of_hue.yaml`
+```yaml
+BulbBasic: 10    <- Cheaper Bulbs
+BulbAmbiance: 20 <- Cheaper Bulbs
+```
+
+##### Results
+```shell
+> ./shopping_list demo/shopping_list.yaml demo/prices.yaml
+...
+Total: 137.5 €
+
+> ./shopping_list demo/shopping_list.yaml demo/prices.yaml demo/free_shipping.yaml
+...
+Total: 122.5 €
+
+> ./shopping_list demo/shopping_list.yaml demo/prices.yaml demo/free_shipping.yaml demo/tradfri_bulb_instead_of_hue.yaml
+...
+Total: 107.5 €
 ```
 
 ## Author Information

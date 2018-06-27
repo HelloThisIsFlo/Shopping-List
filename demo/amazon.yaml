@@ -1,0 +1,9 @@
+InWallSwitch: 56 # <- More expensive InWallSwitch
+PaddleSwitch: 7  # <- Cheaper PaddleSwitch
+
+MotionSensor: 10.5
+
+BulbBasic: 15
+BulbAmbiance: 30
+
+Shipping: 0      # <- Free shipping
