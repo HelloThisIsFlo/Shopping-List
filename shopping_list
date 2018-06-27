@@ -1,5 +1,0 @@
-#!/usr/bin/env pipenv run python
-
-if __name__ == '__main__':
-    import shoppinglist.cli
-    shoppinglist.cli.cli()

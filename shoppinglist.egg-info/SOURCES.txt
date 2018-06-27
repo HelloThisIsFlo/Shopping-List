@@ -1,0 +1,15 @@
+LICENSE
+MANIFEST.in
+README.md
+setup.py
+bin/shoppinglist
+shoppinglist/__init__.py
+shoppinglist/cli.py
+shoppinglist/items.py
+shoppinglist/main.py
+shoppinglist.egg-info/PKG-INFO
+shoppinglist.egg-info/SOURCES.txt
+shoppinglist.egg-info/dependency_links.txt
+shoppinglist.egg-info/requires.txt
+shoppinglist.egg-info/top_level.txt
+shoppinglist.egg-info/zip-safe

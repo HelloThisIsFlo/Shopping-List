@@ -1,9 +1,9 @@
-# Shopping List - Cost breakdown calculator
-
+# Shopping List - Do More, Pay Less
 
 `shopping_list` is a simple tool to calculate the cost breakdown and total of a shopping list containing items in multiple categories.
 
-It allows to create **different variation of prices**, to compare the influence in the total cost.
+It allows to create **different variation of prices**, to compare the influence in the total cost.  
+See the corresponding section [Pro Tip - Price combinations](#pro-tip---price-combinations)
 
 ## `shopping_list` in action
 The project was originally created to estimate the total cost of devices in a Home-Automation project and **see the influence of different purchase decisions**.
@@ -16,7 +16,7 @@ The project was originally created to estimate the total cost of devices in a Ho
 
 
 ```shell
-> ./shopping_list shopping_list.yaml prices.yaml 
+> shoppinglist shopping_list.yaml prices.yaml 
 
 Total cost breakdown
 
@@ -62,34 +62,18 @@ Shipping: 15
 
 #### Demo versions of these files can be find under `demo/`  
 ```shell
-./shopping_list demo/shopping_list.yaml demo/prices.yaml
+shoppinglist demo/shopping_list.yaml demo/prices.yaml
 ```
 
 ## Usage
-### Prerequisites: Pipenv
-This project needs `pipenv` in order to work.
-
-If you haven't set it up already... please do yourself a favor and read about it. That thing made my life just slightly better... but to the point where I actually notice an increase in my mood while working with python projects.   
-Kudos to them :)
-
-More info on: [Pipenv: Python Development Workflow for Humans](https://github.com/pypa/pipenv)
-
-**Interested in having that setup automatically for you?**  
-Then check out my ansible role that does just that ;)  
-**==>** [FlorianKempenich.python-virtualenv](https://github.com/FlorianKempenich/ansible-role-python-virtualenv)
-
 ### Installation
-```
-git clone git@github.com:FlorianKempenich/Shopping-List.git
-cd Shopping-List
-pipenv install
-# Or, for development purposes
-pipenv install --dev && pipenv shell
+```bash
+pip install shoppinglist
 ```
 
 ### Usage
 ```
-Usage: ./shopping_list [OPTIONS] SHOPPING_LIST_FILE PRICES_FILE
+Usage: shoppinglist [OPTIONS] SHOPPING_LIST_FILE PRICES_FILE
                        [PRICE_OVERRIDES_FILES]...
 
 Options:
@@ -160,15 +144,15 @@ Shipping: 15
 
 ##### Results
 ```shell
-> ./shopping_list demo/shopping_list.yaml demo/prices.yaml
+> shoppinglist demo/shopping_list.yaml demo/prices.yaml
 ...
 Total: 137.5 €
 
-> ./shopping_list demo/shopping_list.yaml demo/amazon.yaml 
+> shoppinglist demo/shopping_list.yaml demo/amazon.yaml 
 ...
 Total: 174.5 €
 
-> ./shopping_list demo/shopping_list.yaml demo/upgrade_basic_to_ambiance.yaml
+> shoppinglist demo/shopping_list.yaml demo/upgrade_basic_to_ambiance.yaml
 ...
 Total: 152.5 €
 ```
@@ -201,18 +185,50 @@ BulbAmbiance: 20 <- Cheaper Bulbs
 
 ##### Results
 ```shell
-> ./shopping_list demo/shopping_list.yaml demo/prices.yaml
+> shoppinglist demo/shopping_list.yaml demo/prices.yaml
 ...
 Total: 137.5 €
 
-> ./shopping_list demo/shopping_list.yaml demo/prices.yaml demo/free_shipping.yaml
+> shoppinglist demo/shopping_list.yaml demo/prices.yaml demo/free_shipping.yaml
 ...
 Total: 122.5 €
 
-> ./shopping_list demo/shopping_list.yaml demo/prices.yaml demo/free_shipping.yaml demo/tradfri_bulb_instead_of_hue.yaml
+> shoppinglist demo/shopping_list.yaml demo/prices.yaml demo/free_shipping.yaml demo/tradfri_bulb_instead_of_hue.yaml
 ...
 Total: 107.5 €
 ```
+
+## Development
+### Prerequisites: Pipenv
+This project needs `pipenv` in order to work.
+
+If you haven't set it up already... please do yourself a favor and read about it. That thing made my life just slightly better... but to the point where I actually notice an increase in my mood while working with python projects.   
+Kudos to them :)
+
+More info on: [Pipenv: Python Development Workflow for Humans](https://github.com/pypa/pipenv)
+
+**Interested in having that setup automatically for you?**  
+Then check out my ansible role that does just that ;)  
+**==>** [FlorianKempenich.python-virtualenv](https://github.com/FlorianKempenich/ansible-role-python-virtualenv)
+
+### Installation
+```bash
+git clone git@github.com:FlorianKempenich/Shopping-List.git
+cd Shopping-List
+pipenv install --dev
+pipenv shell
+```
+
+### Tests
+```bash
+pytest
+# Or
+./start_tdd.sh
+```
+
+
+
+
 
 ## Author Information
 Follow me on Twitter: [@ThisIsFlorianK](https://twitter.com/ThisIsFlorianK)  
