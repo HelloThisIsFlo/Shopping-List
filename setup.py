@@ -29,7 +29,8 @@ setup(
     license='MIT',
     scripts=['bin/shoppinglist'],
     install_requires=[
-        'click'
+        'click',
+        'pyyaml'
     ],
     include_package_data=True,
     zip_safe=True
