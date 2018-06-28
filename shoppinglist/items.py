@@ -74,9 +74,10 @@ class Counter:
 
 
 class Formatter:
-    def format(self, cost_result, count_result={}):
+    def format(self, cost_result, count_result={}, show_breakdown=True):
         self.cost_result = cost_result
         self.count_result = count_result
+        self.show_breakdown = show_breakdown
 
         breakdown = self._format_breakdown()
         count = self._format_count()
@@ -85,6 +86,9 @@ class Formatter:
         return breakdown + count + total
 
     def _format_breakdown(self):
+        if not self.show_breakdown:
+            return ""
+
         header = textwrap.dedent("""
             Total cost breakdown
             --------------------""")

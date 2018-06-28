@@ -54,6 +54,14 @@ def test_with_count():
             """)
 
 
+def test_without_breakdown():
+    main = Main(LIST_MOCK_FILE, PRICES_MOCK_FILE)
+
+    assert main.process_files(with_breakdown=False) == textwrap.dedent("""
+            Total: 55 €
+            """)
+
+
 def test_with_overrides():
     main = Main(
         LIST_WITH_EXTRA_ITEM_MOCK_FILE,

@@ -79,11 +79,12 @@ pip3 install --user shoppinglist
 ### Usage
 ```
 Usage: shoppinglist [OPTIONS] SHOPPING_LIST_FILE PRICES_FILE
-                       [PRICE_OVERRIDES_FILES]...
+                    [PRICE_OVERRIDES_FILES]...
 
 Options:
-  --with-count  Display the count for each item
-  --help        Show this message and exit.
+  --with-count         Display the count for each item
+  --without-breakdown  Hide the cost breakdown for each category
+  --help               Show this message and exit.
 ```
 #### Arguments
 ##### `SHOPPING_LIST_FILE`

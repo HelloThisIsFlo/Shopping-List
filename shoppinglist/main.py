@@ -23,12 +23,12 @@ class Main:
 
         return tuple(price_overrides)
 
-    def process_files(self, with_count=False):
+    def process_files(self, with_count=False, with_breakdown=True):
         calculator = CostCalculator(self.prices, self.price_overrides)
         cost_result = calculator.cost(self.items_per_category)
 
         if with_count:
             count_result = self.counter.count_items(self.items_per_category)
-            return self.formatter.format(cost_result, count_result)
+            return self.formatter.format(cost_result, count_result, show_breakdown=with_breakdown)
         else:
-            return self.formatter.format(cost_result)
+            return self.formatter.format(cost_result, show_breakdown=with_breakdown)

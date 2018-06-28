@@ -227,34 +227,44 @@ class TestFormatter:
                 Total: 80 €
                 """)
 
-    class TestWithCount:
-        def test_multiple_categories(self, formatter):
-            formatted = formatter.format(
-                {
-                    'total': 80,
-                    'categories': [
-                        ('kitchen', 15),
-                        ('living-room', 65)
-                    ]
-                }, {
-                    'InWallSwitch': 1,
-                    'BulbBasic': 2,
-                    'BulbColor': 1
-                })
+    def test_with_count(self, formatter):
+        formatted = formatter.format(
+            {
+                'total': 80,
+                'categories': [
+                    ('kitchen', 15),
+                    ('living-room', 65)
+                ]
+            }, {
+                'InWallSwitch': 1,
+                'BulbBasic': 2,
+                'BulbColor': 1
+            })
 
-            assert formatted == textwrap.dedent("""
-                Total cost breakdown
-                --------------------
-                Kitchen: 15 €
-                Living Room: 65 €
-                --------------------
+        assert formatted == textwrap.dedent("""
+            Total cost breakdown
+            --------------------
+            Kitchen: 15 €
+            Living Room: 65 €
+            --------------------
 
-                Item Count
-                --------------------
-                InWallSwitch: 1
-                BulbBasic: 2
-                BulbColor: 1
-                --------------------
+            Item Count
+            --------------------
+            InWallSwitch: 1
+            BulbBasic: 2
+            BulbColor: 1
+            --------------------
 
-                Total: 80 €
-                """)
+            Total: 80 €
+            """)
+
+    def test_without_breakdown(self, formatter):
+        assert formatter.format({
+            'total': 80,
+            'categories': [
+                ('kitchen', 15),
+                ('living-room', 65)
+            ]
+        }, show_breakdown=False) == textwrap.dedent("""
+            Total: 80 €
+            """)
